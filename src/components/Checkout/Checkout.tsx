@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiBookmarkMinus } from "react-icons/ci";
 
 interface CheckoutProps {
   cartItems: any[]; // Replace 'any' with your actual CartItem type
@@ -46,17 +48,17 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, total }) => {
                     <h3>{item.name}</h3>
                     <p>₦{item.price.toLocaleString()}</p>
                   </div>
-                  <p className="text-sm">In-stock</p>
+                  <p className="text-sm container bg-primary w-[80px]">In-stock</p>
                   <div className="flex items-center">
-                    <div className="w-4 h-4 rounded-full bg-[${item.color}] mr-2"></div>
+                    <div className="w-4 h-4 rounded-full bg-[red] mr-2"></div>
                     <span>|</span>
-                    <p className="ml-2">Size: {item.size}</p>
+                    <p className="ml-2">{40}</p>
                   </div>
                   <div className="flex justify-between mt-2">
-                    <button className="text-red-500">
-                      <span>Delete</span> Remove
+                    <button className="text-ash flex">
+                      <span><RiDeleteBin6Line /></span> Remove
                     </button>
-                    <button className="text-blue-500">Save for later</button>
+                    <button className="text-ash flex "> <CiBookmarkMinus /> Save for later</button>
                   </div>
                 </div>
               </div>

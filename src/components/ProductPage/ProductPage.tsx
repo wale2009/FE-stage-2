@@ -193,7 +193,7 @@ const ProductListing: React.FC = () => {
         <FaPlus />
       </button>
       {addedToCart === product.id && (
-        <div className="absolute top-0 left-0 right-0 bg-secondary text-white text-center py-1 hidden">
+        <div className="absolute top-0 left-0 right-0 bg-secondary text-white text-center py-1">
           Added to cart!
         </div>
       )}
