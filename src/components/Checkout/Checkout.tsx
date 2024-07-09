@@ -6,7 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiBookmarkMinus } from "react-icons/ci";
 
 interface CheckoutProps {
-  cartItems: any[]; // Replace 'any' with your actual CartItem type
+  cartItems: any[];
   total: number;
 }
 
@@ -14,25 +14,25 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, total }) => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handlePayment = () => {
-    // Implement payment logic here
     setPaymentSuccess(true);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col sm:grid-col justify-between items-start mb-12">
-        <div className="mb-4 sm:mb-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start mb-12">
+        <div className="mb-4 sm:mb-0">
           <Link href="/carts" className="flex items-center text-black">
             <ArrowLeftIcon className="w-5 h-5 mr-2" />
             <span className="text-lg font-bold">Go Back</span>
           </Link>
         </div>
       </div>
-      <h1 className="text-2xl font-bold mb-4 mt-10">Summary Order</h1>
-      <p>Check your items and submit for better experience</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-        <div className="order-1 md:order-1">
-          <div className="border rounded-lg p-4">
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div>
+          <h1 className="text-2xl font-bold mb-4">Summary Order</h1>
+          <p>Check your items and submit for better experience</p>
+          <div className="border rounded-lg p-4 mt-4">
             {cartItems.map((item) => (
               <div key={item.id} className="flex mb-4">
                 <div className="w-1/4">
@@ -48,58 +48,50 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, total }) => {
                     <h3>{item.name}</h3>
                     <p>₦{item.price.toLocaleString()}</p>
                   </div>
-                  <p className="text-sm container bg-primary w-[80px]">In-stock</p>
+                  <p className="text-sm container bg-primary w-[80px]">
+                    In-stock
+                  </p>
                   <div className="flex items-center">
-                    <div className="w-4 h-4 rounded-full bg-[red] mr-2"></div>
-                    <span>|</span>
                     <p className="ml-2">{40}</p>
                   </div>
-                  <div className="flex justify-between mt-2">
-                    <button className="text-ash flex">
-                      <span><RiDeleteBin6Line /></span> Remove
+                  <div className="flex gap-4 mt-2">
+                    <button className="text-ash flex items-center">
+                      <RiDeleteBin6Line className="mr-1" />
+                      Remove
                     </button>
-                    <button className="text-ash flex "> <CiBookmarkMinus /> Save for later</button>
+                    <button className="text-ash flex items-center">
+                      <CiBookmarkMinus className="mr-1" />
+                      Save for later
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 md:mt-4 order-2 md:order-3">
+          <div className="mt-8">
             <h2 className="text-xl font-bold mb-4 font-inter">
               Delivery Options
             </h2>
             <div className="mb-4">
-              <label className="flex items-center justify-between mt-5 mb-4">
+              <label className="flex items-center justify-between mb-4 w-full">
                 <span>1. Deliver to me</span>
                 <input
                   type="checkbox"
-                  name="delivery"
-                  value="deliver"
-                  defaultChecked
-                  className="hidden peer"
+                  className="form-checkbox h-5 w-5 text-gray-700 rounded ml-4"
                 />
-                <span className="ml-2 flex items-center">
-                  <span className="w-4 h-4 border-2 border-gray-700 rounded-sm peer-checked:bg-gray-700 peer-checked:content-[''] peer-checked:inline-block peer-checked:w-2 peer-checked:h-2 " />
-                </span>
               </label>
               <button className="mt-2 bg-green-100 px-4 py-2 rounded">
                 Add delivery address
               </button>
             </div>
             <div>
-              <label className="flex items-center justify-between mt-5 mb-4">
-                <span>2. Pick up from store </span>
+              <label className="flex items-center justify-between mb-4 w-full">
+                <span>2. Pick from the store </span>
                 <input
                   type="checkbox"
-                  name="delivery"
-                  value="deliver"
-                  defaultChecked
-                  className="hidden peer"
+                  className="form-checkbox h-5 w-5 text-gray-700 rounded ml-4"
                 />
-                <span className="ml-2 flex items-center">
-                  <span className="w-4 h-4 border-2 border-gray-700 rounded-sm peer-checked:bg-gray-700 peer-checked:content-[''] peer-checked:inline-block peer-checked:w-2 peer-checked:h-2 " />
-                </span>
               </label>
               <button className="mt-2 bg-gray-200 px-4 py-2 rounded">
                 Select pickup location
@@ -108,79 +100,101 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, total }) => {
           </div>
         </div>
 
-        <div className="order-3 md:order-2">
-          <h2 className="text-xl font-bold mt-8 md:mt-0 mb-4">
-            Payment Details
-          </h2>
-          <p>Complete your purchase by providing your card details</p>
+        <div className="lg:py-8">
+          <div className="sticky top-8">
+            <h2 className="text-2xl font-bold mb-6">Payment Details</h2>
+            <p className="mb-6">
+              Complete your purchase by providing your card details
+            </p>
 
-          <h3 className="font-bold mt-4 mb-2">Choose card type</h3>
-          <div className="flex space-x-4 mb-4">
-            <button className="border p-2 rounded">Mastercard</button>
-            <button className="border p-2 rounded">PayPal</button>
-            <button className="border p-2 rounded">Apple Pay</button>
+            <h3 className="font-bold mt-6 mb-4">Choose card type</h3>
+            <div className="flex space-x-4 mb-6">
+              <div className="flex gap-4">
+                <button className="border border-gray-300 p-2 rounded-lg overflow-hidden">
+                  <img
+                    src="MC.png"
+                    alt="Mastercard"
+                    className="w-16 h-10 object-contain"
+                  />
+                </button>
+                <button className="border border-gray-300 p-2 rounded-lg overflow-hidden">
+                  <img
+                    src="PP.png"
+                    alt="PayPal"
+                    className="w-16 h-10 object-contain"
+                  />
+                </button>
+                <button className="border border-gray-300 p-2 rounded-lg overflow-hidden">
+                  <img
+                    src="AP.png"
+                    alt="Apple Pay"
+                    className="w-16 h-10 object-contain"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <form className="space-y-4">
+              <input
+                type="email"
+                placeholder="Email address"
+                className="w-full p-2 border rounded"
+              />
+              <input
+                type="text"
+                placeholder="Name on card"
+                className="w-full p-2 border rounded"
+              />
+              <div className="flex">
+                <input
+                  type="text"
+                  placeholder="Card number"
+                  className="w-2/3 p-2 border rounded-l"
+                />
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  className="w-1/6 p-2 border-t border-b"
+                />
+                <input
+                  type="text"
+                  placeholder="CVV"
+                  className="w-1/6 p-2 border rounded-r"
+                />
+              </div>
+              <label className="flex items-center">
+                <input type="checkbox" />
+                <span className="ml-2">Save card for future use</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Billing address"
+                className="w-full p-2 border rounded"
+              />
+
+              <div className="border-t pt-4 space-y-2">
+                <div className="flex justify-between mb-6">
+                  <span>Subtotal</span>
+                  <span>₦{total.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between mb-6">
+                  <span>Shipping</span>
+                  <span>₦3,000</span>
+                </div>
+                <div className="flex justify-between font-bold mb-6">
+                  <span>Total</span>
+                  <span>₦{(total + 3000).toLocaleString()}</span>
+                </div>
+              </div>
+
+              <button
+                onClick={handlePayment}
+                className="w-full bg-secondary text-white py-3 rounded mt-6"
+              >
+                Pay ₦{(total + 3000).toLocaleString()}
+              </button>
+            </form>
           </div>
-
-          <form>
-            <input
-              type="email"
-              placeholder="Email address"
-              className="w-full mb-2 p-2 border rounded"
-            />
-            <input
-              type="text"
-              placeholder="Name on card"
-              className="w-full mb-2 p-2 border rounded"
-            />
-            <div className="flex mb-2">
-              <input
-                type="text"
-                placeholder="Card number"
-                className="w-2/3 p-2 border rounded-l"
-              />
-              <input
-                type="text"
-                placeholder="MM/YY"
-                className="w-1/6 p-2 border-t border-b"
-              />
-              <input
-                type="text"
-                placeholder="CVV"
-                className="w-1/6 p-2 border rounded-r"
-              />
-            </div>
-            <label className="flex items-center mb-4">
-              <input type="checkbox" />
-              <span className="ml-2">Save card for future use</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Billing address"
-              className="w-full mb-4 p-2 border rounded"
-            />
-
-            <div className="border-t pt-4 mb-4">
-              <div className="flex justify-between mb-2">
-                <span>Subtotal</span>
-                <span>₦{total.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Shipping</span>
-                <span>₦3,000</span>
-              </div>
-              <div className="flex justify-between font-bold">
-                <span>Total</span>
-                <span>₦{(total + 3000).toLocaleString()}</span>
-              </div>
-            </div>
-
-            <button
-              onClick={handlePayment}
-              className="w-full bg-secondary text-white py-2 rounded"
-            >
-              Pay ₦{(total + 3000).toLocaleString()}
-            </button>
-          </form>
         </div>
       </div>
 

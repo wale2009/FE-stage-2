@@ -163,7 +163,7 @@ const ProductListing: React.FC = () => {
         alt={product.name}
         width={500}
         height={300}
-        className="w-full h-48 object-cover font-semibold  "
+        className="w-full h-50 object-cover font-semibold  "
       />
       <div className="p-4">
         <h3 className="font-inter text-sm font-medium mb-2">{product.name}</h3>
